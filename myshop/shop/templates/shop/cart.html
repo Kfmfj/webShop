@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Shop</title>
+    <link rel="stylesheet" href="{% static 'shop/styles.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h2>Your Cart</h2>
+<div class="cart-container">
+  {% for item in cart_items %}
+    <div class="cart-item">
+      {% if item.product.image %}
+        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+      {% endif %}
+      <div class="item-info">
+        <strong>{{ item.product.name }}</strong>
+        <p>Price: ${{ item.product.price }}</p>
+        <p>Quantity: {{ item.quantity }}</p>
+      </div>
+      <div class="cart-controls">
+        <a href="{% url 'increase_quantity' item.product.id %}">+</a>
+        <a href="{% url 'decrease_quantity' item.product.id %}">−</a>
+        <a href="{% url 'remove_from_cart' item.product.id %}">Remove</a>
+      </div>
+    </div>
+  {% empty %}
+    <p>Your cart is empty.</p>
+  {% endfor %}
+
+  {% if cart_items %}
+    <form action="{% url 'create_checkout_session' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="checkout-btn">Proceed to Checkout</button>
+    </form>
+    <a  method="post" href="{% url 'checkout' %}">Change personal info</a>
+  {% endif %}
+</div>
+
+<a href="{% url 'home_page' %}" class="back-link">← Continue Shopping</a>
+</body>

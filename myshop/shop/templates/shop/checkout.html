@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'checkout' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Proceed to Payment</button>
+</form>

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }} - My Shop</title>
+    <link rel="stylesheet" href="{% static 'shop/styles.css' %}">
+</head>
+<body>
+    <a href="{% url 'home_page' %}">← Back to products</a>
+
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <p>Price: ${{ product.price }}</p>
+
+    <div class="product-images">
+        {% if product.main_image %}
+            <img src="{{ product.main_image.url }}" alt="{{ product.name }}" width="300">
+        {% endif %}
+        {% for img in product.images.all %}
+            <img src="{{ img.image.url }}" alt="{{ product.name }}" width="300">
+        {% empty %}
+            <p>No extra images</p>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'add_to_cart' product.id %}">Add to cart</a>
+</body>
+</html>
