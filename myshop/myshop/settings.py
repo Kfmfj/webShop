@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v+2)ih9^pzt6gbx7+)$j-#-u9^4ok4^jlbf7gp&chqlbd(ct@o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'shop.context_processors.site_settings',
+                
             ],
         },
     },
@@ -130,5 +131,5 @@ LOGOUT_REDIRECT_URL = '/'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '')
 
-STRIPE_LIVE_MODE = False  # True in production
+STRIPE_LIVE_MODE = True  # True in production
 

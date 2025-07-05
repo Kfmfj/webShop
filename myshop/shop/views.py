@@ -197,10 +197,19 @@ def checkout(request):
     if request.method == 'POST':
         form = CheckoutForm(request.POST)
         if form.is_valid():
+            # Save form data in session
             request.session['checkout_data'] = form.cleaned_data
-            return redirect('create_checkout_session')
+
+            # Get which button was clicked
+            action = request.POST.get('action')
+
+            if action == 'save':
+                return redirect('checkout') 
+
+            elif action == 'proceed':
+                return redirect('create_checkout_session')
     else:
-        # Try to prefill form with session data
+        # Prefill form if data exists
         initial_data = request.session.get('checkout_data', {})
         form = CheckoutForm(initial=initial_data)
 

@@ -3,17 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Shop</title>
+    <meta charset="UTF-8">
+    <title>{{ shop_name }}</title>
     <link rel="stylesheet" href="{% static 'shop/styles.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
   <header class="top-bar">
+  <div class="container">
     <h1 class="shop-title">{{ shop_name }}</h1>
     <a href="{% url 'view_cart' %}" class="cart-button">
-        Cart (<span id="cart-count">{{ cart_count }}</span>)
+        🛒Cart (<span id="cart-count">{{ cart_count }}</span>)
     </a>
-  </header>
+  </div>
+</header>
+
     <!-- Login / Logout / Register buttons -->
     <div class="auth-buttons">
         {% if user.is_authenticated %}
@@ -31,7 +35,7 @@
     </div>
 
     <!-- Page title -->
-    <h1>Product List</h1>
+    <h1>{{ products_name }}</h1>
 
     <div class="products">
         {% for product in products %}
@@ -44,7 +48,6 @@
                 <p>{{ product.description }}</p>
                 <p>${{ product.price }}</p>
                 </a>
-                <!-- Change this from a link to a button with data attribute -->
                 <button class="add-to-cart-btn" data-product-id="{{ product.id }}">
                     Add to cart
                 </button>
@@ -52,10 +55,8 @@
         {% endfor %}
     </div>
 
-    <!-- Add CSRF token as a hidden input for JS -->
     <input type="hidden" id="csrf-token" value="{{ csrf_token }}">
 
-    <!-- Include your JS file -->
     <script src="{% static 'shop/shop.js' %}"></script>
 </body>
 </html>

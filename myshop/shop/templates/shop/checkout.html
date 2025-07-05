@@ -1,5 +1,40 @@
-<form method="post" action="{% url 'checkout' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Proceed to Payment</button>
-</form>
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Shop</title>
+    <link rel="stylesheet" href="{% static 'shop/styles.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="products">
+  <div class="checkout-container">
+
+    <h2>Parcel delivery information</h2>
+    <div>Please enter valid information.</div>
+
+    <form method="post" action="{% url 'checkout' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="button-group">
+        <!-- This will trigger payment -->
+        <button type="submit" name="action" value="proceed" class="checkout-btn">
+          Proceed to Checkout
+        </button>
+
+        <!-- This will just save to session and reload page -->
+        <button type="submit" name="action" value="save" class="checkout-btn secondary">
+          💾 Save Changes
+        </button>
+
+        <!-- Back to cart -->
+        <a href="{% url 'view_cart' %}" class="back-btn">Back to 🛒Cart</a>
+      </div>
+    </form>
+
+  </div>
+
+</body>
+</html>
