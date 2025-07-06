@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }} - My Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'shop/styles.css' %}">
+</head>
+<body>
+
+    <div class="top-bar">
+        <h1 class="shop-title">My Shop</h1>
+        <a href="{% url 'view_cart' %}">🛒 View Cart</a>
+    </div>
+
+    <main class="product-detail-container">
+        <a href="{% url 'home_page' %}" class="back-link">← Back to products</a>
+
+        <section class="product-detail-card">
+            <div class="product-images">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}">
+                {% endif %}
+                {% for img in product.images.all %}
+                    <img src="{{ img.image.url }}" alt="{{ product.name }}">
+                {% empty %}
+                    <p>No extra images</p>
+                {% endfor %}
+            </div>
+
+            <div class="product-info">
+                <h1>{{ product.name }}</h1>
+                <p class="description">{{ product.description }}</p>
+                <p class="price">Price: ${{ product.price }}</p>
+
+                <button class="add-to-cart-btn" data-product-id="{{ product.id }}">
+                    Add to cart
+                </button>
+            </div>
+        </section>
+    </main>
+    <script src="{% static 'shop/shop.js' %}"></script>
+</body>
+</html>
