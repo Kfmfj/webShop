@@ -26,7 +26,7 @@ Payment Gateway: Stripe
 
 Features: Dynamic content, admin control, secure payments
 
-Key Features
+# Key Features
 
 Dynamic product catalog with admin management
 
