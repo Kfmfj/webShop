@@ -2,7 +2,6 @@
 
 A custom Django-based web shop built for a real offline business.
 The system lets customers order products online while the store owner handles packaging and shipping manually.
-Due to privacy terms, source code cannot be published, but screenshots and feature details are provided.
 
 # Project Overview
 
