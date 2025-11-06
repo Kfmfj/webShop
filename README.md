@@ -1,4 +1,4 @@
-Web Shop for Local Store
+# Web Shop for Local Store
 
 A custom Django-based web shop built for a real offline business.
 The system lets customers order products online while the store owner handles packaging and shipping manually.
